@@ -102,7 +102,7 @@ header{
     transition: 1.7s;
 }
 
-.cart:active{
+.cart.active{
     right: 0;
     transition: .5s;
 
