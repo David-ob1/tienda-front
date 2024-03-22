@@ -76,13 +76,12 @@ function handle_addCartItem(){
     let imgSrc = product.querySelector(".product-img").src;
 
     console.log(title,price,imgSrc);
-}
 
 let newToAdd = {
     title,
     price,
     imgSrc,
-}
+}   
 
 // El elemento de manejo ya existente
 
@@ -94,3 +93,49 @@ alert("Este Articulo ya existe");
 itemsAdded.push(newToAdd)
 }
 
+
+let carBoxElement = cartBoxComponent(title, imgSrc)
+let newNode = document.createElement("div")
+newNode.innerHTML = carBoxElement
+const cartContent = cart.querySelector(".cart-contnt")
+cartContent.appendChild(newNode)
+
+update()
+}
+
+
+function handle_removeCartItem(){
+    this.parentElement.remove();
+
+    itemsAdded = itemsAdded.filter( el =>
+        el.title != this.parentElement.querySelector(".cart-product-title").innerHTML
+    )
+
+    update();
+}
+
+function handle_changeItemQuantity(){
+    if(isNaN(this.value)|| this.value < 1){
+        this.value = 1;
+    }
+
+    this.value = Math.floor(this.value)//numero entero
+
+    update();
+
+}
+
+function handle_buyOrden(){
+
+    if(itemsAdded.length <= 0){
+        alert("aun no hay pedidos para realizar")
+        return;
+    }
+
+    const cartContent = cart.querySelector(".cart-content")
+    cartContent.innerHTML ="";
+    alert("Su pedido se realizo con exito");
+    itemsAdded = []
+}
+
+//duncion actualizar y renderizar
